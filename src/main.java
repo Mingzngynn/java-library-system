@@ -219,7 +219,7 @@ public class main {
                     seeder.seedMockData();
                     break;
                 case 10:
-                    if(currentUser.getRole().equals("Super Admin")) {
+                    if(currentUser.getBorrowLimit()==999) {
                         System.out.println("⚠️ Dangerous Operation ⚠️");
                         System.out.println("This action will clear everythins");
                         System.out.print("You sure to continue?(YES/NO): ");
