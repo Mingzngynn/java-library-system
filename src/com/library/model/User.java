@@ -1,3 +1,5 @@
+package com.library.model;
+
 public class User {
     private int borrowLimit;
     private int id;
@@ -32,10 +34,10 @@ public class User {
     public void setName(String name) {
         this.name = name;
     }
-    public String getphone() {
+    public String getPhone() {
         return phone;
     }
-    public void setphone(String phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
     public String getRole() {

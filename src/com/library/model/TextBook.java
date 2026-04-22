@@ -1,15 +1,16 @@
-public class textBook extends Book {
+package com.library.model;
+
+public class TextBook extends Book {
     private String subject;
     private String status;
-    public textBook(String title, String author, String subject, int id, String status){
+    public TextBook(String title, String author, String subject, int id, String status){
         super(title,author,id);
         this.subject = subject;
     }
-    public textBook(String title, String author, String subject, String status){
+    public TextBook(String title, String author, String subject, String status){
         super(title,author);
-        this.subject = subject;
+        this.status = status;
     }
-
     public String getStatus() {
         return status;
     }
@@ -23,7 +24,7 @@ public class textBook extends Book {
         this.subject = Newsubject;
     }
     @Override
-    public void inThongTin() {
+    public void displayInfo() {
         System.out.println("ID: "+ getId() + " | Name: " + getTitle() + " | Author: " + getAuthor() + " | Subject: " + getSubject());
     }
 }
