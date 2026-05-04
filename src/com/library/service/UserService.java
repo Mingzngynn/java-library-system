@@ -54,7 +54,7 @@ public class UserService {
             ppst.setInt(1,uid);
             int rowDeleted = ppst.executeUpdate();
             if(rowDeleted!=0){
-                System.out.println("com.library.model.User with id "+uid+" deleted successfully");
+                System.out.println("User with id "+uid+" deleted successfully");
             }
         } catch (Exception e) {
             System.out.println("Error in deleting user from database");
@@ -71,7 +71,7 @@ public class UserService {
             ppst.setInt(4,user.getId());
             int rowUpdated = ppst.executeUpdate();
             if(rowUpdated!=0){
-                System.out.println("com.library.model.User with id "+user.getId()+" updated successfully");
+                System.out.println("User with id "+user.getId()+" updated successfully");
             }
         }catch(Exception e){
             System.out.println("Error in updating user in database");

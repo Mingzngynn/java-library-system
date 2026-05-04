@@ -42,13 +42,13 @@ public class Main {
 
         do {
             System.out.println("\n---- MAIN MENU ----");
-            System.out.println("1. Add com.library.model.Book to Database");
+            System.out.println("1. Add Book to Database");
             System.out.println("2. Review all Books");
-            System.out.println("3. Update com.library.model.Book");
-            System.out.println("4. Delete com.library.model.Book");
-            System.out.println("5. Add/Update com.library.model.User");
-            System.out.println("6. Borrow a com.library.model.Book");
-            System.out.println("7. Return a com.library.model.Book");
+            System.out.println("3. Update Book");
+            System.out.println("4. Delete Book");
+            System.out.println("5. Add/Update User");
+            System.out.println("6. Borrow a Book");
+            System.out.println("7. Return a Book");
             System.out.println("8. Exit System");
             System.out.println("9. Creating new database");
             System.out.println("10. Reset database");
@@ -67,7 +67,7 @@ public class Main {
                     updateBook(sc,bookService);
                     break;
                 case 4:
-                    System.out.println("Enter the com.library.model.Book ID: ");
+                    System.out.println("Enter the Book ID: ");
                     int id = sc.nextInt();
                     sc.nextLine();
                     bookService.deleteBook(id);
@@ -80,7 +80,7 @@ public class Main {
                     break;
                 case 7:
                     int userid =currentUser.getId();
-                    System.out.println("Enter com.library.model.Book ID to return: ");
+                    System.out.println("Enter Book ID to return: ");
                     int bookid = sc.nextInt();
                     sc.nextLine();
                     borrowService.returnBook(userid, bookid);
@@ -119,8 +119,8 @@ public class Main {
 
     private static void userManager(Scanner sc,UserService userService){
         System.out.println("---- USER MANAGEMENT ----");
-        System.out.println("1. Add com.library.model.User To Database");
-        System.out.println("2. Update com.library.model.User To Database");
+        System.out.println("1. Add User To Database");
+        System.out.println("2. Update User To Database");
         int choice2 = sc.nextInt();
         sc.nextLine();
         User userToUpdate = null;
@@ -137,7 +137,7 @@ public class Main {
                 userService.addUserToDatabase(userToUpdate);
                 break;
             case 2:
-                System.out.println("Chosen com.library.model.User ID you want to update: ");
+                System.out.println("Chosen User ID you want to update: ");
                 int userId = sc.nextInt();
                 sc.nextLine();
                 for(User u : userList){
@@ -169,19 +169,19 @@ public class Main {
         for(Book b : freshBookList){
             b.displayInfo();
         }
-        System.out.println("Choose com.library.model.Book ID you want to Borrow: ");
+        System.out.println("Choose Book ID you want to Borrow: ");
         int bookID = sc.nextInt();
         sc.nextLine();
         try {
             borrowService.borrowBook(currentUser, bookID);
             //  Thay vì bắt nhập uId,lấy luôn currentUser.getId() để truyền vào
         }catch (Exception e){
-            System.out.println("Cant borrow com.library.model.Book now ");
+            System.out.println("Cant borrow Book now ");
         }
     }
     private static void updateBook(Scanner sc,BookService bookService){
         System.out.println("---- UPDATE BOOK ----");
-        System.out.println("Enter com.library.model.Book ID to update: ");
+        System.out.println("Enter Book ID to update: ");
         int idb =sc.nextInt();
         sc.nextLine();
         System.out.print("Enter NEW Title: ");
@@ -190,9 +190,9 @@ public class Main {
         String newAuthor = sc.nextLine();
 
         System.out.println("Choose type book you want to update: ");
-        System.out.println("1. com.library.model.EBook");
-        System.out.println("2. com.library.model.TextBook");
-        System.out.println("3. com.library.model.ReferenceBook");
+        System.out.println("1. EBook");
+        System.out.println("2. TextBook");
+        System.out.println("3. ReferenceBook");
         int choose = sc.nextInt();
         sc.nextLine();
 
@@ -218,7 +218,7 @@ public class Main {
         bookService.addBookToDatabase(bookToUpdate);
     }
     private static void reviewBook( BookService bookService){
-        System.out.println("----com.library.model.Book List on the Library Management System----");
+        System.out.println("----Book List on the Library Management System----");
         List<Book> bookList = bookService.getAllBooks();
         if (bookList.isEmpty()) {
             System.out.println("There is no Books in the Library Management System");
@@ -230,32 +230,32 @@ public class Main {
         System.out.println("---------------------------------------");
     }
     private static void mainMenu(Scanner sc, BookService bookService){
-        System.out.println("----Enter the com.library.model.Book Type----");
-        System.out.println("1. com.library.model.EBook");
-        System.out.println("2. com.library.model.TextBook");
-        System.out.println("3. com.library.model.ReferenceBook");
+        System.out.println("----Enter the Book Type----");
+        System.out.println("1. EBook");
+        System.out.println("2. TextBook");
+        System.out.println("3. ReferenceBook");
         int bookType = sc.nextInt();
         sc.nextLine();
-        System.out.println("Enter the com.library.model.Book Title: ");
+        System.out.println("Enter the Book Title: ");
         String title = sc.nextLine();
 
-        System.out.println("Enter the com.library.model.Book Author: ");
+        System.out.println("Enter the Book Author: ");
         String author = sc.nextLine();
 
         Book newBook = null;
-        // Khai báo biến com.library.model.Book (Lớp cha) để chứa dữ liệu - ĐÂY LÀ ĐA HÌNH
+        // Khai báo biến Book (Lớp cha) để chứa dữ liệu - ĐÂY LÀ ĐA HÌNH
         if (bookType == 1) {
-            System.out.println("Enter the com.library.model.Book fileSize: ");
+            System.out.println("Enter the Book fileSize: ");
             double fileSize = sc.nextDouble();
             newBook = new EBook(title, author, fileSize);
         } else if (bookType == 2) {
-            System.out.println("Enter the com.library.model.Book subject: ");
+            System.out.println("Enter the Book subject: ");
             String subject = sc.nextLine();
-            System.out.println("Enter the com.library.model.Book status: ");
+            System.out.println("Enter the Book status: ");
             String status = sc.nextLine();
             newBook = new TextBook(title, author, subject, status);
         } else if (bookType == 3) {
-            System.out.println("Enter the com.library.model.Book status: ");
+            System.out.println("Enter the Book status: ");
             String status = sc.nextLine();
             newBook = new ReferenceBook(title, author, status);
         } else {

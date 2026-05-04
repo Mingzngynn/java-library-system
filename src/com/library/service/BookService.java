@@ -23,7 +23,7 @@ public class BookService {
 
             if(book instanceof EBook){
                 //instanceof de xem book thuoc class nao
-                ppst.setString(3,"com.library.model.EBook");
+                ppst.setString(3,"EBook");
                 EBook eb = (EBook) book;
                 ppst.setDouble(4,eb.getFileSize());
                 ppst.setNull(5, java.sql.Types.VARCHAR);
@@ -45,10 +45,10 @@ public class BookService {
                 ppst.setNull(6, java.sql.Types.VARCHAR);
             }
             ppst.executeUpdate();
-            System.out.println("com.library.model.Book added successfully");
+            System.out.println("Book added successfully");
         }
         catch(Exception e){
-            System.out.println("Error adding com.library.model.Book to database");
+            System.out.println("Error adding Book to database");
             e.printStackTrace();
         }
     }
@@ -68,7 +68,7 @@ public class BookService {
                 String title = rs.getString("title");
                 String author = rs.getString("author");
                 String type = rs.getString("type");
-                if(type.equals("com.library.model.EBook")){
+                if(type.equals("EBook")){
                     Double fileSize = rs.getDouble("file_size");
                     EBook eb = new EBook(title,author,id,fileSize);
                     booksList.add(eb);
@@ -99,10 +99,10 @@ public class BookService {
             ppst.setInt(1,bid);
             int rowDeleted = ppst.executeUpdate();
             if(rowDeleted>0){
-                System.out.println("com.library.model.Book deleted successfully");
+                System.out.println("Book deleted successfully");
             }
             else {
-                System.out.println("com.library.model.Book delete failed");
+                System.out.println("Book delete failed");
             }
         }catch (SQLException e) {
             System.out.println("Problem deleting book");

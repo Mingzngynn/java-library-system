@@ -18,7 +18,7 @@ public class BorrowService {
         ppst1.setInt(1, bookID);
         ResultSet rs1 = ppst1.executeQuery();
         if (rs1.next() && rs1.getInt(1 )>0) {
-            System.out.println("com.library.model.Book already borrowed");
+            System.out.println("Book already borrowed");
             conn.rollback();
             return;
         }
@@ -27,7 +27,7 @@ public class BorrowService {
             ppst2.setInt(1, user.getId());
             ResultSet rs2 = ppst2.executeQuery();
             if(rs2.next() && rs2.getInt(1)>= user.getBorrowLimit() ){
-                System.out.println("com.library.model.User has reached limit of " + user.getBorrowLimit());
+                System.out.println("User has reached limit of " + user.getBorrowLimit());
                 conn.rollback();
                 return;
             }
@@ -74,7 +74,7 @@ public class BorrowService {
 
             int rowsAffected = ppst.executeUpdate();
             if(rowsAffected>0){
-                System.out.println("com.library.model.Book id: "+ bookId + " has been successfully returned!");
+                System.out.println("Book id: "+ bookId + " has been successfully returned!");
             }else {
                 System.out.println("Failed to return book ");
             }
