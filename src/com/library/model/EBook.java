@@ -1,6 +1,6 @@
-import java.io.Serializable;
+package com.library.model;
 
-public class EBook extends Book  {
+public class EBook extends Book {
     private double fileSize;
     public EBook(String title, String author, int id, double fileSize) {
         super(title, author, id);
@@ -17,7 +17,7 @@ public class EBook extends Book  {
         this.fileSize = newfileSize;
     }
     @Override
-    public void inThongTin() {
+    public void displayInfo() {
         System.out.println("ID: "+ getId()+ " | Name: " + getTitle() + " | Author: "+ getAuthor()+ " | File size: " + getFileSize());
     }
 }

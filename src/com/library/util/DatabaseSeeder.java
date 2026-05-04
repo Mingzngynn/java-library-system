@@ -1,11 +1,31 @@
+package com.library.util;
+
+import com.library.model.EBook;
+import com.library.model.ReferenceBook;
+import com.library.model.TextBook;
+import com.library.model.User;
+import com.library.service.BookService;
+import com.library.service.UserService;
+
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.Statement;
-import java.sql.*;
+
 public class DatabaseSeeder {
-    private String url = "jdbc:mysql://localhost:3306/new_schema"; // Nhớ sửa đúng tên schema
-    private String username = "root";
-    private String password = "root";
+
     public void seedMockData(){
+        String checkQuery = "SELECT COUNT(*) FROM users";
+        try(Connection conn = DatabaseConnection.getConnection();
+            Statement stmt= conn.createStatement();
+            ResultSet rs = stmt.executeQuery(checkQuery)  ) {
+            if (rs.next() && rs.getInt(1) > 0) {
+                // Đã có dữ liệu thì cảnh báo và thoát hàm luôn (Fail-fast)
+                System.out.println("⚠️ Dữ liệu mẫu đã tồn tại trong Database. Bỏ qua lệnh Seed.");
+                return;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         System.out.println("Generating data for the system....");
         UserService us = new UserService();
         BookService bs = new BookService();
@@ -24,12 +44,12 @@ public class DatabaseSeeder {
             bs.addBookToDatabase(new EBook("Head First Java", "Kathy Sierra", 2, 42.0));
 
             // textBooks (Cần subject và status)
-            bs.addBookToDatabase(new textBook("Toan Roi Rac", "NXB", "Toan Hoc", 3, "Mới"));
-            bs.addBookToDatabase(new textBook("Giao trinh C++", "PTIT", "Lap Trinh", 4, "Cũ"));
+            bs.addBookToDatabase(new TextBook("Toan Roi Rac", "NXB", "Toan Hoc", 3, "Mới"));
+            bs.addBookToDatabase(new TextBook("Giao trinh C++", "PTIT", "Lap Trinh", 4, "Cũ"));
 
             // referenceBooks (Chỉ cần status)
-            bs.addBookToDatabase(new referenceBook("TOEIC Preparation Vol 1", "ETS", 5, "Mới"));
-            bs.addBookToDatabase(new referenceBook("Tu dien Anh-Viet", "Oxford", 6, "Cũ"));
+            bs.addBookToDatabase(new ReferenceBook("TOEIC Preparation Vol 1", "ETS", 5, "Mới"));
+            bs.addBookToDatabase(new ReferenceBook("Tu dien Anh-Viet", "Oxford", 6, "Cũ"));
 
             System.out.println("Successfully generated data to database");
         }catch (Exception e){
@@ -39,7 +59,7 @@ public class DatabaseSeeder {
     }
     public void clearDatabase(){
         System.out.println("🧹 Clearing database...");
-        try (Connection conn = DriverManager.getConnection(url, username, password);
+        try (Connection conn = DatabaseConnection.getConnection();
              Statement stmt = conn.createStatement()) {
             // Tắt MySQL
             stmt.execute("SET FOREIGN_KEY_CHECKS = 0;");

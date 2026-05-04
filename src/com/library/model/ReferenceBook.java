@@ -1,10 +1,12 @@
-public class referenceBook extends Book {
+package com.library.model;
+
+public class ReferenceBook extends Book {
     private String status;
-    public referenceBook(String title, String author, int id, String status) {
+    public ReferenceBook(String title, String author, int id, String status) {
         super(title,author,id);
         this.status = status;
     }
-    public referenceBook(String title,String author, String status) {
+    public ReferenceBook(String title,String author, String status) {
         super(title,author);
         this.status = status;
     }
@@ -16,7 +18,7 @@ public class referenceBook extends Book {
     }
 
     @Override
-    public void inThongTin() {
+    public void displayInfo() {
         System.out.println("ID: "+ getId() + " | Name: " + getTitle() + " | Author: " + getAuthor() + " | Status: " + getStatus());
     }
 }

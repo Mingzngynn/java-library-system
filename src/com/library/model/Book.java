@@ -1,3 +1,5 @@
+package com.library.model;
+
 public abstract class  Book {
     private String title;
     private String author;
@@ -32,7 +34,7 @@ public abstract class  Book {
     public void setId(int newId) {
         this.id = newId;
     }
-    public abstract void inThongTin();
+    public abstract void displayInfo();
 
 
 }
